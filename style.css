@@ -1,7 +1,15 @@
-.container {
+#container {
     display: flex;
     flex-wrap: wrap;
     border: 1px solid black;
     width: 700px;
     height: 700px;
+}
+
+.alive {
+    background-color: blueviolet;
+}
+
+.dead {
+    background-color: antiquewhite;
 }
