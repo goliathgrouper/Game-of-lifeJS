@@ -47,9 +47,13 @@ let editState = false;
 editBtn.addEventListener('click', (event) => {
     if (editState) {
         editState = false;
+        editBtn.style.backgroundColor = '';
+        editBtn.style.color = '';
         container.removeEventListener('click', editGrid);
     } else {
         editState = true;
+        editBtn.style.backgroundColor = 'purple';
+        editBtn.style.color = 'white';
         container.addEventListener('click', editGrid);
     }
 
