@@ -2,12 +2,15 @@ const SIZE = 700;
 
 const container = document.querySelector('#container');
 
+let grid = [];
+
 function getSquareSize(squareNumber) {
     return `${(SIZE/squareNumber)-2}px`;
 }
 
 function generateGrid(n) {
     let square;
+    
     for (let i = 0; i < n**2; i++) {
         square = document.createElement('div');
         square.style.border = '1px solid black';
@@ -17,6 +20,7 @@ function generateGrid(n) {
 
         container.appendChild(square);
     }
+    grid = [...container.querySelectorAll('#container > div')];
 }
 
 generateGrid(16);
@@ -29,6 +33,7 @@ document.querySelector('#grid-size').addEventListener('click', (event) => {
 
     const oldGrid = document.querySelectorAll('#container > div');
     oldGrid.forEach(el => container.removeChild(el));
+
     generateGrid(newGridSize);
 });
 
