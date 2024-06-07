@@ -6,6 +6,11 @@
     height: 700px;
 }
 
+html {
+    display: flex;
+    justify-content: center;
+}
+
 .alive {
     background-color: blueviolet;
 }
