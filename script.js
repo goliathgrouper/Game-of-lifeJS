@@ -37,6 +37,8 @@ document.querySelector('#grid-size').addEventListener('click', (event) => {
     generateGrid(newGridSize);
 });
 
+
+// Change alive or dead
 function editGrid(event) {
     if (event.target.className === 'dead') {
         event.target.classList.remove('dead');
@@ -47,6 +49,8 @@ function editGrid(event) {
     }
 }
 
+
+// Edit alive or dead by color
 const editBtn = document.querySelector('#edit');
 let editState = false;
 editBtn.addEventListener('click', (event) => {
@@ -64,3 +68,12 @@ editBtn.addEventListener('click', (event) => {
 
 });
 
+const strendbtn = document.querySelector('#start-end');
+strendbtn.addEventListener('click', (event) => {
+    let text = strendbtn.textContent;
+    if (text === 'Start') {
+        strendbtn.textContent = 'End';
+    } else {
+        strendbtn.textContent = 'Start';
+    }
+});
