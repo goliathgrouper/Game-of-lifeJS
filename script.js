@@ -6,7 +6,8 @@ const strendbtn = document.querySelector('#start-end');
 const container = document.querySelector('#container');
 
 let gridSize;
-let grid = [];
+let nextGrid = [];
+let curGrid;
 
 function getSquareSize(squareNumber) {
     return `${(SIZE/squareNumber)-2}px`;
@@ -27,7 +28,7 @@ function generateGrid(n) {
             column.push(square);
             container.appendChild(square);
         }
-        grid.push(column);
+        nextGrid.push(column);
         
     }
     //grid = [...container.querySelectorAll('#container > div')];
@@ -89,41 +90,56 @@ strendbtn.addEventListener('click', (event) => {
     }
 });
 
+while (1) {
+    curGrid = JSON.parse(JSON.stringify(nextGrid));
+    for (let x = 0; x < gridSize; x++) {
+        for (let y = 0; y < gridSize; y++) {
+            leftCoord = (x - 1) % gridSize;
+            rightCoord = (x + 1) % gridSize;
+            aboveCoord = (y - 1) % gridSize;
+            belowCoord = (y + 1) % gridSize;
 
-for (let x = 0; x < gridSize; x++) {
-    for (let y = 0; y < gridSize; y++) {
-        leftCoord = (x - 1) % gridSize;
-        rightCoord = (x + 1) % gridSize;
-        aboveCoord = (y - 1) % gridSize;
-        belowCoord = (y + 1) % gridSize;
+            numNeighbors = 0
+            if (curGrid.at(leftCoord).at(aboveCoord).classList.contains('alive')) {
+                numNeighbors += 1;
+            }
+            if (curGrid.at(x).at(aboveCoord).classList.contains('alive')) {
+                numNeighbors += 1;
+            } 
+            if (curGrid.at(rightCoord).at(aboveCoord).classList.contains('alive')) {
+                numNeighbors += 1;
+            } 
+            if (curGrid.at(leftCoord).at(y).classList.contains('alive')) {
+                numNeighbors += 1;
+            } 
+            if (curGrid.at(rightCoord).at(y).classList.contains('alive')) {
+                numNeighbors += 1;
+            } 
+            if (curGrid.at(leftCoord).at(belowCoord).classList.contains('alive')) {
+                numNeighbors += 1;
+            } 
+            if (curGrid.at(x).at(belowCoord).classList.contains('alive')) {
+                numNeighbors += 1;
+            } 
+            if (curGrid.at(rightCoord).at(belowCoord).classList.contains('alive')) {
+                numNeighbors += 1;
+            } 
 
-        numNeighbors = 0
-        if (grid.at(leftCoord).at(aboveCoord).classList.contains('alive')) {
-            numNeighbors += 1;
+            if (curGrid[x][y].classList.contains('alive') && (numNeighbors === 2 || numNeighbors === 3)) {
+                continue;
+            }
+            if (curGrid[x][y].classList.contains('dead') && numNeighbors === 3) {
+                nextGrid[x][y].classList.remove('dead');
+                nextGrid[x][y].classList.add('alive');
+            } else {
+                if (curGrid[x][y].classList.contains('dead')) {
+                    continue
+                } else {
+                    curGrid[x][y].classList.remove('alive');
+                    curGrid[x][y].classList.add('dead');
+                }
+            }
         }
-        if (grid.at(x).at(aboveCoord).classList.contains('alive')) {
-            numNeighbors += 1;
-        } 
-        if (grid.at(rightCoord).at(aboveCoord).classList.contains('alive')) {
-            numNeighbors += 1;
-        } 
-        if (grid.at(leftCoord).at(y).classList.contains('alive')) {
-            numNeighbors += 1;
-        } 
-        if (grid.at(rightCoord).at(y).classList.contains('alive')) {
-            numNeighbors += 1;
-        } 
-        if (grid.at(leftCoord).at(belowCoord).classList.contains('alive')) {
-            numNeighbors += 1;
-        } 
-        if (grid.at(x).at(belowCoord).classList.contains('alive')) {
-            numNeighbors += 1;
-        } 
-        if (grid.at(rightCoord).at(belowCoord).classList.contains('alive')) {
-            numNeighbors += 1;
-        } 
-
-        if (grid[x][y].classList.contains()){} // TOBECONTINUED...................
     }
 }
 /*# Calculate the next step's cells based on current step's cells:
