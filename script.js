@@ -122,6 +122,8 @@ for (let x = 0; x < gridSize; x++) {
         if (grid.at(rightCoord).at(belowCoord).classList.contains('alive')) {
             numNeighbors += 1;
         } 
+
+        if (grid[x][y].classList.contains()){} // TOBECONTINUED...................
     }
 }
 /*# Calculate the next step's cells based on current step's cells:
