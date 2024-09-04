@@ -1,7 +1,7 @@
 const SIZE = 700;
 
 const editBtn = document.querySelector('#edit');
-const strendbtn = document.querySelector('#start-end');
+const nextbtn = document.querySelector('#next');
 
 const container = document.querySelector('#container');
 
@@ -79,19 +79,12 @@ editBtn.addEventListener('click', (event) => {
 });
 
 
-strendbtn.addEventListener('click', (event) => {
-    let text = strendbtn.textContent;
-    if (text === 'Start') {
-        strendbtn.textContent = 'End';
-        
-    } else {
-        strendbtn.textContent = 'Start';
-        
-    }
-});
-
-while (1) {
-    curGrid = JSON.parse(JSON.stringify(nextGrid));
+nextbtn.addEventListener('click', (event) => {
+    curGrid = nextGrid.map((x) => {
+        return x.map((y) => {
+            return y.classList[0];
+        });
+    });
     for (let x = 0; x < gridSize; x++) {
         for (let y = 0; y < gridSize; y++) {
             leftCoord = (x - 1) % gridSize;
@@ -100,47 +93,51 @@ while (1) {
             belowCoord = (y + 1) % gridSize;
 
             numNeighbors = 0
-            if (curGrid.at(leftCoord).at(aboveCoord).classList.contains('alive')) {
+            if (curGrid.at(leftCoord).at(aboveCoord) == 'alive') {
                 numNeighbors += 1;
             }
-            if (curGrid.at(x).at(aboveCoord).classList.contains('alive')) {
+            if (curGrid.at(x).at(aboveCoord) == 'alive') {
                 numNeighbors += 1;
             } 
-            if (curGrid.at(rightCoord).at(aboveCoord).classList.contains('alive')) {
+            if (curGrid.at(rightCoord).at(aboveCoord) == 'alive') {
                 numNeighbors += 1;
             } 
-            if (curGrid.at(leftCoord).at(y).classList.contains('alive')) {
+            if (curGrid.at(leftCoord).at(y) == 'alive') {
                 numNeighbors += 1;
             } 
-            if (curGrid.at(rightCoord).at(y).classList.contains('alive')) {
+            if (curGrid.at(rightCoord).at(y) == 'alive') {
                 numNeighbors += 1;
             } 
-            if (curGrid.at(leftCoord).at(belowCoord).classList.contains('alive')) {
+            if (curGrid.at(leftCoord).at(belowCoord) == 'alive') {
                 numNeighbors += 1;
             } 
-            if (curGrid.at(x).at(belowCoord).classList.contains('alive')) {
+            if (curGrid.at(x).at(belowCoord) == 'alive') {
                 numNeighbors += 1;
             } 
-            if (curGrid.at(rightCoord).at(belowCoord).classList.contains('alive')) {
+            if (curGrid.at(rightCoord).at(belowCoord) == 'alive') {
                 numNeighbors += 1;
             } 
 
-            if (curGrid[x][y].classList.contains('alive') && (numNeighbors === 2 || numNeighbors === 3)) {
+            if (curGrid[x][y] == 'alive' && (numNeighbors === 2 || numNeighbors === 3)) {
                 continue;
             }
-            if (curGrid[x][y].classList.contains('dead') && numNeighbors === 3) {
+            if (curGrid[x][y] == 'dead' && numNeighbors === 3) {
                 nextGrid[x][y].classList.remove('dead');
                 nextGrid[x][y].classList.add('alive');
             } else {
-                if (curGrid[x][y].classList.contains('dead')) {
+                if (curGrid[x][y] == 'dead') {
                     continue
                 } else {
-                    curGrid[x][y].classList.remove('alive');
-                    curGrid[x][y].classList.add('dead');
+                    nextGrid[x][y].classList.remove('alive');
+                    nextGrid[x][y].classList.add('dead');
                 }
             }
         }
     }
+});
+
+while (0) {
+    
 }
 /*# Calculate the next step's cells based on current step's cells:
     for x in range(gridSize):
