@@ -1,8 +1,8 @@
 const SIZE = 700;
 
 const editBtn = document.querySelector('#edit');
-const nextbtn = document.querySelector('#next');
-
+const nextBtn = document.querySelector('#next');
+const playBtn = document.querySelector('#play');
 const container = document.querySelector('#container');
 
 let gridSize;
@@ -80,7 +80,25 @@ editBtn.addEventListener('click', (event) => {
 });
 
 
-nextbtn.addEventListener('click', (event) => {
+nextBtn.addEventListener('click', (event) => {
+    nextGen();
+});
+let intervalId;
+playBtn.addEventListener('click', (event) => {
+    if (playBtn.textContent == 'Play') {
+        playBtn.textContent = 'Stop';
+        intervalId = setInterval(nextGen, 800);
+    } else {
+        playBtn.textContent = 'Play';
+        clearInterval(intervalId);
+    }
+});
+
+
+
+
+
+function nextGen() {
     curGrid = nextGrid.map((x) => {
         return x.map((y) => {
             return y.classList[0];
@@ -135,4 +153,4 @@ nextbtn.addEventListener('click', (event) => {
             }
         }
     }
-});
+}
