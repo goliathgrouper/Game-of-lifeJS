@@ -87,7 +87,7 @@ let intervalId;
 playBtn.addEventListener('click', (event) => {
     if (playBtn.textContent == 'Play') {
         playBtn.textContent = 'Stop';
-        intervalId = setInterval(nextGen, 800);
+        intervalId = setInterval(nextGen, 500);
     } else {
         playBtn.textContent = 'Play';
         clearInterval(intervalId);
