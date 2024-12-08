@@ -3,7 +3,10 @@ const SIZE = 700;
 const editBtn = document.querySelector('#edit');
 const nextBtn = document.querySelector('#next');
 const playBtn = document.querySelector('#play');
+const resetBtn = document.querySelector('#reset');
+
 const container = document.querySelector('#container');
+
 
 let gridSize;
 let nextGrid = [];
@@ -40,15 +43,26 @@ generateGrid(16);
 document.querySelector('#grid-size').addEventListener('click', (event) => {
     let newGridSize;
     do {
-        newGridSize = prompt('Select new grid-size (5 - 100)');
+        newGridSize = +prompt('Select new grid-size (5 - 100)');
     } while (newGridSize > 100 || newGridSize < 5);
 
-    const oldGrid = document.querySelectorAll('#container > div');
-    oldGrid.forEach(el => container.removeChild(el));
+    clearGrid();
 
     generateGrid(newGridSize);
 });
 
+// Reset button functionality
+resetBtn.addEventListener('click', (event) => {
+    clearGrid();
+    generateGrid(gridSize);
+});
+
+
+// Clear grid
+function clearGrid() {
+    const oldGrid = document.querySelectorAll('#container > div');
+    oldGrid.forEach(el => container.removeChild(el));
+}
 
 // Change alive or dead
 function editGrid(event) {
