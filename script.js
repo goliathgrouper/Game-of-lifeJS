@@ -86,7 +86,7 @@ editBtn.addEventListener('click', (event) => {
         container.removeEventListener('click', editGrid);
     } else {
         editState = true;
-        editBtn.style.backgroundColor = 'purple';
+        editBtn.style.backgroundColor = 'maroon';
         editBtn.style.color = 'white';
         container.addEventListener('click', editGrid);
     }
